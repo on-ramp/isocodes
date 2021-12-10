@@ -1,0 +1,30 @@
+version: 2.1
+jobs:
+  build:
+    docker:
+      - image: fpco/stack-build:lts
+
+    resource_class: medium
+
+    steps:
+      - checkout
+
+      - restore_cache:
+          name: Restore cached dependencies
+          keys:
+            - cache-{{ checksum "stack.yaml" }}-{{ checksum "package.yaml" }}
+            - cache-{{ checksum "stack.yaml" }}
+      - run:
+          name: Resolve/update dependencies
+          command: stack --no-terminal -j2 setup
+
+      - run:
+          name: Run tests
+          command: stack --no-terminal -j2 test
+
+      - save_cache:
+          name: Cache dependencies
+          key: cache-{{ checksum "stack.yaml" }}-{{ checksum "package.yaml" }}
+          paths:
+            - "/root/.stack"
+            - ".stack-work"
