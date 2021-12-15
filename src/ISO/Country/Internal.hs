@@ -1,4 +1,6 @@
-{-# LANGUAGE FlexibleContexts
+{-# LANGUAGE DeriveDataTypeable
+           , DeriveGeneric
+           , FlexibleContexts
            , FlexibleInstances
            , MultiParamTypeClasses
            , OverloadedStrings
@@ -15,16 +17,18 @@ import           ISO.Format
 import qualified Country
 import           Data.Aeson
 import qualified Data.Attoparsec.Text as AT
+import           Data.Data (Data)
 import           Data.Scientific
 import           Data.Text (Text)
 import qualified Data.Text as T
 import           Data.Word
+import           GHC.Generics (Generic)
 import           Web.HttpApiData
 
 
 
 data Country (format :: k) = Country { unCountry :: Country.Country }
-                             deriving Eq
+                             deriving (Data, Eq, Generic, Ord)
 
 
 
