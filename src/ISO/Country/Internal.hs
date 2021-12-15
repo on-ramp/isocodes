@@ -1,4 +1,5 @@
 {-# LANGUAGE FlexibleInstances
+           , MultiParamTypeClasses
            , OverloadedStrings
            , PolyKinds #-}
 
@@ -6,6 +7,7 @@
 
 module ISO.Country.Internal where
 
+import           ISO.Convert
 import           ISO.Format
 
 import qualified Country
@@ -14,6 +16,7 @@ import qualified Data.Attoparsec.Text as AT
 import           Data.Scientific
 import           Data.Text (Text)
 import qualified Data.Text as T
+import           Data.Word
 import           Web.HttpApiData
 
 
@@ -24,51 +27,75 @@ data Country (format :: k) = Country { unCountry :: Country.Country }
 
 
 instance Show (Country Alpha2) where
-  show = T.unpack . Country.alphaTwoUpper . unCountry
+  show = T.unpack . to
 
 instance Show (Country Alpha3) where
-  show = T.unpack . Country.alphaThreeUpper . unCountry
+  show = T.unpack . to
 
 instance Show (Country Code) where
-  show = show . Country.encodeNumeric . unCountry
+  show = show . to
 
 instance Show (Country Name) where
-  show = show . T.unpack . Country.encodeEnglish . unCountry
+  show = show . T.unpack . to
+
+
+
+instance Convert Country Alpha2 Text where
+  from = fmap Country . Country.decodeAlphaTwo
+
+  to = Country.alphaTwoUpper . unCountry
+
+instance Convert Country Alpha3 Text where
+  from = fmap Country . Country.decodeAlphaThree
+
+  to = Country.alphaThreeUpper . unCountry
+
+instance Convert Country Code Word16 where
+  from = fmap Country . Country.decodeNumeric
+
+  to = Country.encodeNumeric . unCountry
+
+instance Convert Country Name Text where
+  from = fmap Country . Country.decode
+
+  to = Country.encodeEnglish . unCountry
 
 
 
 instance ToJSON (Country Name) where
-  toJSON = String . toQueryParam
+  toJSON = String . to
 
 instance FromJSON (Country Name) where
-  parseJSON = withText "Country Name"
-                $ either (fail . T.unpack) return
-                . parseQueryParam
+  parseJSON = withText "Country Name" $ \val ->
+                case from val of
+                  Nothing      -> fail $ "Not a valid Country Name: " <> T.unpack val
+                  Just country -> return country
 
 instance ToHttpApiData (Country Name) where
-  toQueryParam = Country.encodeEnglish . unCountry
+  toQueryParam = to
 
 instance FromHttpApiData (Country Name) where
   parseQueryParam val =
-    case Country.decode val of
+    case from val of
       Nothing      -> Left $ "Not a valid Country Name: " <> val
-      Just country -> Right $ Country country
+      Just country -> Right country
+
 
 
 instance ToJSON (Country Code) where
-  toJSON = Number . fromIntegral . Country.encodeNumeric . unCountry
+  toJSON = Number . fromIntegral . to
 
 instance FromJSON (Country Code) where
   parseJSON = withScientific "Country Code" $ \val ->
                 case toBoundedInteger val of
                   Nothing      -> fail $ "Country Code is not an integer value: " <> show val
                   Just bounded ->
-                    case Country.decodeNumeric bounded of
+                    case from bounded of
                       Nothing      -> fail $ "Country Code matches no Country: " <> show val
-                      Just country -> return $ Country country
+                      Just country -> return country
 
 instance ToHttpApiData (Country Code) where
-  toQueryParam = T.pack . show . Country.encodeNumeric . unCountry
+  toQueryParam = T.pack . show . to
 
 instance FromHttpApiData (Country Code) where
   parseQueryParam val =
@@ -78,42 +105,46 @@ instance FromHttpApiData (Country Code) where
         case toBoundedInteger sci of
           Nothing      -> Left $ "Country Code is not an integer value: " <> T.pack (show sci)
           Just bounded ->
-            case Country.decodeNumeric bounded of
+            case from bounded of
               Nothing      -> Left $ "Not a valid Country Code: " <> T.pack (show bounded)
-              Just country -> Right $ Country country
+              Just country -> Right country
+
 
 
 instance ToJSON (Country Alpha2) where
-  toJSON = String . toQueryParam
+  toJSON = String . to
 
 instance FromJSON (Country Alpha2) where
-  parseJSON = withText "Country Alpha2"
-                $ either (fail . T.unpack) return
-                . parseQueryParam
+  parseJSON = withText "Country Alpha2" $ \val ->
+                case from val of
+                  Nothing      -> fail $ "Not a valid Country Alpha2: " <> T.unpack val
+                  Just country -> return country
 
 instance ToHttpApiData (Country Alpha2) where
-  toQueryParam = Country.alphaTwoUpper . unCountry
+  toQueryParam = to
 
 instance FromHttpApiData (Country Alpha2) where
   parseQueryParam val =
-    case Country.decodeAlphaTwo val of
+    case from val of
       Nothing      -> Left $ "Not a valid Country Alpha2: " <> val
-      Just country -> Right $ Country country
+      Just country -> Right country
+
 
 
 instance ToJSON (Country Alpha3) where
-  toJSON = String . toQueryParam
+  toJSON = String . to
 
 instance FromJSON (Country Alpha3) where
-  parseJSON = withText "Country Alpha3"
-                $ either (fail . T.unpack) return
-                . parseQueryParam
+  parseJSON = withText "Country Alpha3" $ \val ->
+                case from val of
+                  Nothing      -> fail $ "Not a valid Country Alpha3: " <> T.unpack val
+                  Just country -> return country
 
 instance ToHttpApiData (Country Alpha3) where
-  toQueryParam = Country.alphaThreeUpper . unCountry
+  toQueryParam = to
 
 instance FromHttpApiData (Country Alpha3) where
   parseQueryParam val =
-    case Country.decodeAlphaThree val of
+    case from val of
       Nothing      -> Left $ "Not a valid Country Alpha3: " <> val
-      Just country -> Right $ Country country
+      Just country -> Right country

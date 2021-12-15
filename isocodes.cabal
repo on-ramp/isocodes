@@ -4,22 +4,21 @@ cabal-version: 1.12
 --
 -- see: https://github.com/sol/hpack
 --
--- hash: 2f98474d1125f8be678af6988f1b4216fd6744098836e96443a6a3a01afd2fa1
+-- hash: 53792dd0b67e16fd5cf08c5f78653c1f79b08d9275d104b74098959d646aa27e
 
 name:           isocodes
-version:        0.1.0.0
-description:    Please see the README on GitHub at <https://github.com/githubuser/isocodes#readme>
+version:        0.1.0.1
+description:    Please see the README on GitHub at <https://github.com/on-ramp/isocodes#readme>
 homepage:       https://github.com/on-ramp/isocodes#readme
 bug-reports:    https://github.com/on-ramp/isocodes/issues
-author:         Author name here
-maintainer:     example@example.com
-copyright:      2021 Author name here
+author:         Oleksii Divak
+maintainer:     oleksii@coinweb.io
+copyright:      2021 Oleksii Divak
 license:        BSD3
 license-file:   LICENSE
 build-type:     Simple
 extra-source-files:
     README.md
-    ChangeLog.md
 
 source-repository head
   type: git
@@ -27,6 +26,7 @@ source-repository head
 
 library
   exposed-modules:
+      ISO.Convert
       ISO.Country
       ISO.Country.Codes
       ISO.Country.Internal

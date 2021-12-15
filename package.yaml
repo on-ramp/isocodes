@@ -1,5 +1,5 @@
 name:                isocodes
-version:             0.1.0.0
+version:             0.1.0.1
 github:              "on-ramp/isocodes"
 license:             BSD3
 author:              "Oleksii Divak"
@@ -8,7 +8,6 @@ copyright:           "2021 Oleksii Divak"
 
 extra-source-files:
 - README.md
-- ChangeLog.md
 
 description:         Please see the README on GitHub at <https://github.com/on-ramp/isocodes#readme>
 
@@ -27,6 +26,7 @@ dependencies:
 library:
   source-dirs: src
   exposed-modules:
+    - ISO.Convert
     - ISO.Country
     - ISO.Country.Codes
     - ISO.Country.Internal
