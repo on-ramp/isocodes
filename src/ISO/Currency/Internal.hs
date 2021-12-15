@@ -1,4 +1,6 @@
-{-# LANGUAGE FlexibleContexts
+{-# LANGUAGE DeriveDataTypeable
+           , DeriveGeneric
+           , FlexibleContexts
            , FlexibleInstances
            , MultiParamTypeClasses
            , OverloadedStrings
@@ -15,6 +17,8 @@ import           ISO.Format
 import           Data.Aeson
 import qualified Data.Attoparsec.Text as AT
 import qualified Data.Currency as Currency
+import           Data.Data (Data)
+import           Data.Function (on)
 import           Data.HashMap.Lazy (HashMap)
 import qualified Data.HashMap.Lazy as HashMap
 import           Data.IntMap.Lazy (IntMap)
@@ -22,13 +26,16 @@ import qualified Data.IntMap.Lazy as IntMap
 import           Data.Scientific
 import           Data.Text (Text)
 import qualified Data.Text as T
+import           GHC.Generics (Generic)
 import           Web.HttpApiData
 
 
 
 data Currency (format :: k) = Currency { unCurrency :: Currency.Currency }
-                              deriving Eq
+                              deriving (Data, Eq, Generic)
 
+instance Ord (Currency format) where
+  compare = compare `on` Currency.minor . unCurrency
 
 
 instance ToJSON (Currency format) => ToJSONKey (Currency format)
