@@ -1,7 +1,9 @@
-{-# LANGUAGE FlexibleInstances
+{-# LANGUAGE FlexibleContexts
+           , FlexibleInstances
            , MultiParamTypeClasses
            , OverloadedStrings
-           , PolyKinds #-}
+           , PolyKinds
+           , UndecidableInstances #-}
 
 {-# OPTIONS_HADDOCK not-home #-}
 
@@ -26,6 +28,12 @@ import           Web.HttpApiData
 
 data Currency (format :: k) = Currency { unCurrency :: Currency.Currency }
                               deriving Eq
+
+
+
+instance ToJSON (Currency format) => ToJSONKey (Currency format)
+
+instance FromJSON (Currency format) => FromJSONKey (Currency format)
 
 
 

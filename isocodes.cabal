@@ -4,10 +4,10 @@ cabal-version: 1.12
 --
 -- see: https://github.com/sol/hpack
 --
--- hash: 53792dd0b67e16fd5cf08c5f78653c1f79b08d9275d104b74098959d646aa27e
+-- hash: a8d85a114f53ca4d03bd88540d3e64084e8f6b5fbf06d533dc3d641ab7a2231f
 
 name:           isocodes
-version:        0.1.0.1
+version:        0.1.0.2
 description:    Please see the README on GitHub at <https://github.com/on-ramp/isocodes#readme>
 homepage:       https://github.com/on-ramp/isocodes#readme
 bug-reports:    https://github.com/on-ramp/isocodes/issues

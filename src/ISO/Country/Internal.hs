@@ -1,7 +1,9 @@
-{-# LANGUAGE FlexibleInstances
+{-# LANGUAGE FlexibleContexts
+           , FlexibleInstances
            , MultiParamTypeClasses
            , OverloadedStrings
-           , PolyKinds #-}
+           , PolyKinds
+           , UndecidableInstances #-}
 
 {-# OPTIONS_HADDOCK not-home #-}
 
@@ -37,6 +39,12 @@ instance Show (Country Code) where
 
 instance Show (Country Name) where
   show = show . T.unpack . to
+
+
+
+instance ToJSON (Country format) => ToJSONKey (Country format)
+
+instance FromJSON (Country format) => FromJSONKey (Country format)
 
 
 
