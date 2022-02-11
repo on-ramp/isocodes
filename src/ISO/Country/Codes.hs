@@ -1,4 +1,5 @@
-{-# LANGUAGE PatternSynonyms #-}
+{-# LANGUAGE PatternSynonyms
+           , ViewPatterns #-}
 
 module ISO.Country.Codes where
 
@@ -7,6 +8,8 @@ import           ISO.Country.Internal
 import           Country.Identifier
 
 
+
+{-# COMPLETE AFG, ALA, ALB, DZA, ASM, AND, AGO, AIA, ATA, ATG, ARG, ARM, ABW, AUS, AUT, AZE, BHS, BHR, BGD, BRB, BLR, BEL, BLZ, BEN, BMU, BTN, BOL, BES, BIH, BWA, BVT, BRA, IOT, BRN, BGR, BFA, BDI, KHM, CMR, CAN, CPV, CYM, CAF, TCD, CHL, CHN, CXR, CCK, COL, COM, COG, COD, COK, CRI, CIV, HRV, CUB, CUW, CYP, CZE, DNK, DJI, DMA, DOM, ECU, EGY, SLV, GNQ, ERI, EST, ETH, FLK, FRO, FJI, FIN, FRA, GUF, PYF, ATF, GAB, GMB, GEO, DEU, GHA, GIB, GRC, GRL, GRD, GLP, GUM, GTM, GGY, GIN, GNB, GUY, HTI, HMD, VAT, HND, HKG, HUN, ISL, IND, IDN, IRN, IRQ, IRL, IMN, ISR, ITA, JAM, JPN, JEY, JOR, KAZ, KEN, KIR, PRK, KOR, KWT, KGZ, LAO, LVA, LBN, LSO, LBR, LBY, LIE, LTU, LUX, MAC, MKD, MDG, MWI, MYS, MDV, MLI, MLT, MHL, MTQ, MRT, MUS, MYT, MEX, FSM, MDA, MCO, MNG, MNE, MSR, MAR, MOZ, MMR, NAM, NRU, NPL, NLD, NCL, NZL, NIC, NER, NGA, NIU, NFK, MNP, NOR, OMN, PAK, PLW, PSE, PAN, PNG, PRY, PER, PHL, PCN, POL, PRT, PRI, QAT, REU, ROU, RUS, RWA, BLM, SHN, KNA, LCA, MAF, SPM, VCT, WSM, SMR, STP, SAU, SEN, SRB, SYC, SLE, SGP, SXM, SVK, SVN, SLB, SOM, ZAF, SGS, SSD, ESP, LKA, SDN, SUR, SJM, SWZ, SWE, CHE, SYR, TWN, TJK, TZA, THA, TLS, TGO, TKL, TON, TTO, TUN, TUR, TKM, TCA, TUV, UGA, UKR, ARE, GBR, USA, UMI, URY, UZB, VUT, VEN, VNM, VGB, VIR, WLF, ESH, YEM, ZMB, ZWE, XKX #-}
 
 pattern AFG
       , ALA
@@ -259,253 +262,253 @@ pattern AFG
       , ZWE
       , XKX
      :: Country format
-pattern AFG <- _ where AFG = Country afghanistan
-pattern ALA <- _ where ALA = Country ålandIslands
-pattern ALB <- _ where ALB = Country albania
-pattern DZA <- _ where DZA = Country algeria
-pattern ASM <- _ where ASM = Country americanSamoa
-pattern AND <- _ where AND = Country andorra
-pattern AGO <- _ where AGO = Country angola
-pattern AIA <- _ where AIA = Country anguilla
-pattern ATA <- _ where ATA = Country antarctica
-pattern ATG <- _ where ATG = Country antiguaAndBarbuda
-pattern ARG <- _ where ARG = Country argentina
-pattern ARM <- _ where ARM = Country armenia
-pattern ABW <- _ where ABW = Country aruba
-pattern AUS <- _ where AUS = Country australia
-pattern AUT <- _ where AUT = Country austria
-pattern AZE <- _ where AZE = Country azerbaijan
-pattern BHS <- _ where BHS = Country bahamas
-pattern BHR <- _ where BHR = Country bahrain
-pattern BGD <- _ where BGD = Country bangladesh
-pattern BRB <- _ where BRB = Country barbados
-pattern BLR <- _ where BLR = Country belarus
-pattern BEL <- _ where BEL = Country belgium
-pattern BLZ <- _ where BLZ = Country belize
-pattern BEN <- _ where BEN = Country benin
-pattern BMU <- _ where BMU = Country bermuda
-pattern BTN <- _ where BTN = Country bhutan
-pattern BOL <- _ where BOL = Country boliviaPlurinationalStateOf
-pattern BES <- _ where BES = Country bonaireSintEustatiusAndSaba
-pattern BIH <- _ where BIH = Country bosniaAndHerzegovina
-pattern BWA <- _ where BWA = Country botswana
-pattern BVT <- _ where BVT = Country bouvetIsland
-pattern BRA <- _ where BRA = Country brazil
-pattern IOT <- _ where IOT = Country britishIndianOceanTerritory
-pattern BRN <- _ where BRN = Country bruneiDarussalam
-pattern BGR <- _ where BGR = Country bulgaria
-pattern BFA <- _ where BFA = Country burkinaFaso
-pattern BDI <- _ where BDI = Country burundi
-pattern KHM <- _ where KHM = Country cambodia
-pattern CMR <- _ where CMR = Country cameroon
-pattern CAN <- _ where CAN = Country canada
-pattern CPV <- _ where CPV = Country caboVerde
-pattern CYM <- _ where CYM = Country caymanIslands
-pattern CAF <- _ where CAF = Country centralAfricanRepublic
-pattern TCD <- _ where TCD = Country chad
-pattern CHL <- _ where CHL = Country chile
-pattern CHN <- _ where CHN = Country china
-pattern CXR <- _ where CXR = Country christmasIsland
-pattern CCK <- _ where CCK = Country cocosKeelingIslands
-pattern COL <- _ where COL = Country colombia
-pattern COM <- _ where COM = Country comoros
-pattern COG <- _ where COG = Country congo
-pattern COD <- _ where COD = Country congoDemocraticRepublicOfThe
-pattern COK <- _ where COK = Country cookIslands
-pattern CRI <- _ where CRI = Country costaRica
-pattern CIV <- _ where CIV = Country côteDivoire
-pattern HRV <- _ where HRV = Country croatia
-pattern CUB <- _ where CUB = Country cuba
-pattern CUW <- _ where CUW = Country curaçao
-pattern CYP <- _ where CYP = Country cyprus
-pattern CZE <- _ where CZE = Country czechRepublic
-pattern DNK <- _ where DNK = Country denmark
-pattern DJI <- _ where DJI = Country djibouti
-pattern DMA <- _ where DMA = Country dominica
-pattern DOM <- _ where DOM = Country dominicanRepublic
-pattern ECU <- _ where ECU = Country ecuador
-pattern EGY <- _ where EGY = Country egypt
-pattern SLV <- _ where SLV = Country elSalvador
-pattern GNQ <- _ where GNQ = Country equatorialGuinea
-pattern ERI <- _ where ERI = Country eritrea
-pattern EST <- _ where EST = Country estonia
-pattern ETH <- _ where ETH = Country ethiopia
-pattern FLK <- _ where FLK = Country falklandIslandsMalvinas
-pattern FRO <- _ where FRO = Country faroeIslands
-pattern FJI <- _ where FJI = Country fiji
-pattern FIN <- _ where FIN = Country finland
-pattern FRA <- _ where FRA = Country france
-pattern GUF <- _ where GUF = Country frenchGuiana
-pattern PYF <- _ where PYF = Country frenchPolynesia
-pattern ATF <- _ where ATF = Country frenchSouthernTerritories
-pattern GAB <- _ where GAB = Country gabon
-pattern GMB <- _ where GMB = Country gambia
-pattern GEO <- _ where GEO = Country georgia
-pattern DEU <- _ where DEU = Country germany
-pattern GHA <- _ where GHA = Country ghana
-pattern GIB <- _ where GIB = Country gibraltar
-pattern GRC <- _ where GRC = Country greece
-pattern GRL <- _ where GRL = Country greenland
-pattern GRD <- _ where GRD = Country grenada
-pattern GLP <- _ where GLP = Country guadeloupe
-pattern GUM <- _ where GUM = Country guam
-pattern GTM <- _ where GTM = Country guatemala
-pattern GGY <- _ where GGY = Country guernsey
-pattern GIN <- _ where GIN = Country guinea
-pattern GNB <- _ where GNB = Country guineabissau
-pattern GUY <- _ where GUY = Country guyana
-pattern HTI <- _ where HTI = Country haiti
-pattern HMD <- _ where HMD = Country heardIslandAndMcdonaldIslands
-pattern VAT <- _ where VAT = Country holySee
-pattern HND <- _ where HND = Country honduras
-pattern HKG <- _ where HKG = Country hongKong
-pattern HUN <- _ where HUN = Country hungary
-pattern ISL <- _ where ISL = Country iceland
-pattern IND <- _ where IND = Country india
-pattern IDN <- _ where IDN = Country indonesia
-pattern IRN <- _ where IRN = Country iranIslamicRepublicOf
-pattern IRQ <- _ where IRQ = Country iraq
-pattern IRL <- _ where IRL = Country ireland
-pattern IMN <- _ where IMN = Country isleOfMan
-pattern ISR <- _ where ISR = Country israel
-pattern ITA <- _ where ITA = Country italy
-pattern JAM <- _ where JAM = Country jamaica
-pattern JPN <- _ where JPN = Country japan
-pattern JEY <- _ where JEY = Country jersey
-pattern JOR <- _ where JOR = Country jordan
-pattern KAZ <- _ where KAZ = Country kazakhstan
-pattern KEN <- _ where KEN = Country kenya
-pattern KIR <- _ where KIR = Country kiribati
-pattern PRK <- _ where PRK = Country koreaDemocraticPeoplesRepublicOf
-pattern KOR <- _ where KOR = Country koreaRepublicOf
-pattern KWT <- _ where KWT = Country kuwait
-pattern KGZ <- _ where KGZ = Country kyrgyzstan
-pattern LAO <- _ where LAO = Country laoPeoplesDemocraticRepublic
-pattern LVA <- _ where LVA = Country latvia
-pattern LBN <- _ where LBN = Country lebanon
-pattern LSO <- _ where LSO = Country lesotho
-pattern LBR <- _ where LBR = Country liberia
-pattern LBY <- _ where LBY = Country libya
-pattern LIE <- _ where LIE = Country liechtenstein
-pattern LTU <- _ where LTU = Country lithuania
-pattern LUX <- _ where LUX = Country luxembourg
-pattern MAC <- _ where MAC = Country macao
-pattern MKD <- _ where MKD = Country macedoniaTheFormerYugoslavRepublicOf
-pattern MDG <- _ where MDG = Country madagascar
-pattern MWI <- _ where MWI = Country malawi
-pattern MYS <- _ where MYS = Country malaysia
-pattern MDV <- _ where MDV = Country maldives
-pattern MLI <- _ where MLI = Country mali
-pattern MLT <- _ where MLT = Country malta
-pattern MHL <- _ where MHL = Country marshallIslands
-pattern MTQ <- _ where MTQ = Country martinique
-pattern MRT <- _ where MRT = Country mauritania
-pattern MUS <- _ where MUS = Country mauritius
-pattern MYT <- _ where MYT = Country mayotte
-pattern MEX <- _ where MEX = Country mexico
-pattern FSM <- _ where FSM = Country micronesiaFederatedStatesOf
-pattern MDA <- _ where MDA = Country moldovaRepublicOf
-pattern MCO <- _ where MCO = Country monaco
-pattern MNG <- _ where MNG = Country mongolia
-pattern MNE <- _ where MNE = Country montenegro
-pattern MSR <- _ where MSR = Country montserrat
-pattern MAR <- _ where MAR = Country morocco
-pattern MOZ <- _ where MOZ = Country mozambique
-pattern MMR <- _ where MMR = Country myanmar
-pattern NAM <- _ where NAM = Country namibia
-pattern NRU <- _ where NRU = Country nauru
-pattern NPL <- _ where NPL = Country nepal
-pattern NLD <- _ where NLD = Country netherlands
-pattern NCL <- _ where NCL = Country newCaledonia
-pattern NZL <- _ where NZL = Country newZealand
-pattern NIC <- _ where NIC = Country nicaragua
-pattern NER <- _ where NER = Country niger
-pattern NGA <- _ where NGA = Country nigeria
-pattern NIU <- _ where NIU = Country niue
-pattern NFK <- _ where NFK = Country norfolkIsland
-pattern MNP <- _ where MNP = Country northernMarianaIslands
-pattern NOR <- _ where NOR = Country norway
-pattern OMN <- _ where OMN = Country oman
-pattern PAK <- _ where PAK = Country pakistan
-pattern PLW <- _ where PLW = Country palau
-pattern PSE <- _ where PSE = Country palestineStateOf
-pattern PAN <- _ where PAN = Country panama
-pattern PNG <- _ where PNG = Country papuaNewGuinea
-pattern PRY <- _ where PRY = Country paraguay
-pattern PER <- _ where PER = Country peru
-pattern PHL <- _ where PHL = Country philippines
-pattern PCN <- _ where PCN = Country pitcairn
-pattern POL <- _ where POL = Country poland
-pattern PRT <- _ where PRT = Country portugal
-pattern PRI <- _ where PRI = Country puertoRico
-pattern QAT <- _ where QAT = Country qatar
-pattern REU <- _ where REU = Country réunion
-pattern ROU <- _ where ROU = Country romania
-pattern RUS <- _ where RUS = Country russianFederation
-pattern RWA <- _ where RWA = Country rwanda
-pattern BLM <- _ where BLM = Country saintBarthélemy
-pattern SHN <- _ where SHN = Country saintHelenaAscensionAndTristanDaCunha
-pattern KNA <- _ where KNA = Country saintKittsAndNevis
-pattern LCA <- _ where LCA = Country saintLucia
-pattern MAF <- _ where MAF = Country saintMartinFrenchPart
-pattern SPM <- _ where SPM = Country saintPierreAndMiquelon
-pattern VCT <- _ where VCT = Country saintVincentAndTheGrenadines
-pattern WSM <- _ where WSM = Country samoa
-pattern SMR <- _ where SMR = Country sanMarino
-pattern STP <- _ where STP = Country saoTomeAndPrincipe
-pattern SAU <- _ where SAU = Country saudiArabia
-pattern SEN <- _ where SEN = Country senegal
-pattern SRB <- _ where SRB = Country serbia
-pattern SYC <- _ where SYC = Country seychelles
-pattern SLE <- _ where SLE = Country sierraLeone
-pattern SGP <- _ where SGP = Country singapore
-pattern SXM <- _ where SXM = Country sintMaartenDutchPart
-pattern SVK <- _ where SVK = Country slovakia
-pattern SVN <- _ where SVN = Country slovenia
-pattern SLB <- _ where SLB = Country solomonIslands
-pattern SOM <- _ where SOM = Country somalia
-pattern ZAF <- _ where ZAF = Country southAfrica
-pattern SGS <- _ where SGS = Country southGeorgiaAndTheSouthSandwichIslands
-pattern SSD <- _ where SSD = Country southSudan
-pattern ESP <- _ where ESP = Country spain
-pattern LKA <- _ where LKA = Country sriLanka
-pattern SDN <- _ where SDN = Country sudan
-pattern SUR <- _ where SUR = Country suriname
-pattern SJM <- _ where SJM = Country svalbardAndJanMayen
-pattern SWZ <- _ where SWZ = Country swaziland
-pattern SWE <- _ where SWE = Country sweden
-pattern CHE <- _ where CHE = Country switzerland
-pattern SYR <- _ where SYR = Country syrianArabRepublic
-pattern TWN <- _ where TWN = Country taiwanProvinceOfChina
-pattern TJK <- _ where TJK = Country tajikistan
-pattern TZA <- _ where TZA = Country tanzaniaUnitedRepublicOf
-pattern THA <- _ where THA = Country thailand
-pattern TLS <- _ where TLS = Country timorleste
-pattern TGO <- _ where TGO = Country togo
-pattern TKL <- _ where TKL = Country tokelau
-pattern TON <- _ where TON = Country tonga
-pattern TTO <- _ where TTO = Country trinidadAndTobago
-pattern TUN <- _ where TUN = Country tunisia
-pattern TUR <- _ where TUR = Country turkey
-pattern TKM <- _ where TKM = Country turkmenistan
-pattern TCA <- _ where TCA = Country turksAndCaicosIslands
-pattern TUV <- _ where TUV = Country tuvalu
-pattern UGA <- _ where UGA = Country uganda
-pattern UKR <- _ where UKR = Country ukraine
-pattern ARE <- _ where ARE = Country unitedArabEmirates
-pattern GBR <- _ where GBR = Country unitedKingdomOfGreatBritainAndNorthernIreland
-pattern USA <- _ where USA = Country unitedStatesOfAmerica
-pattern UMI <- _ where UMI = Country unitedStatesMinorOutlyingIslands
-pattern URY <- _ where URY = Country uruguay
-pattern UZB <- _ where UZB = Country uzbekistan
-pattern VUT <- _ where VUT = Country vanuatu
-pattern VEN <- _ where VEN = Country venezuelaBolivarianRepublicOf
-pattern VNM <- _ where VNM = Country vietNam
-pattern VGB <- _ where VGB = Country virginIslandsBritish
-pattern VIR <- _ where VIR = Country virginIslandsUs
-pattern WLF <- _ where WLF = Country wallisAndFutuna
-pattern ESH <- _ where ESH = Country westernSahara
-pattern YEM <- _ where YEM = Country yemen
-pattern ZMB <- _ where ZMB = Country zambia
-pattern ZWE <- _ where ZWE = Country zimbabwe
-pattern XKX <- _ where XKX = Country kosovo
+pattern AFG <- ((== Country afghanistan                                  ) -> True) where AFG = Country afghanistan
+pattern ALA <- ((== Country ålandIslands                                 ) -> True) where ALA = Country ålandIslands
+pattern ALB <- ((== Country albania                                      ) -> True) where ALB = Country albania
+pattern DZA <- ((== Country algeria                                      ) -> True) where DZA = Country algeria
+pattern ASM <- ((== Country americanSamoa                                ) -> True) where ASM = Country americanSamoa
+pattern AND <- ((== Country andorra                                      ) -> True) where AND = Country andorra
+pattern AGO <- ((== Country angola                                       ) -> True) where AGO = Country angola
+pattern AIA <- ((== Country anguilla                                     ) -> True) where AIA = Country anguilla
+pattern ATA <- ((== Country antarctica                                   ) -> True) where ATA = Country antarctica
+pattern ATG <- ((== Country antiguaAndBarbuda                            ) -> True) where ATG = Country antiguaAndBarbuda
+pattern ARG <- ((== Country argentina                                    ) -> True) where ARG = Country argentina
+pattern ARM <- ((== Country armenia                                      ) -> True) where ARM = Country armenia
+pattern ABW <- ((== Country aruba                                        ) -> True) where ABW = Country aruba
+pattern AUS <- ((== Country australia                                    ) -> True) where AUS = Country australia
+pattern AUT <- ((== Country austria                                      ) -> True) where AUT = Country austria
+pattern AZE <- ((== Country azerbaijan                                   ) -> True) where AZE = Country azerbaijan
+pattern BHS <- ((== Country bahamas                                      ) -> True) where BHS = Country bahamas
+pattern BHR <- ((== Country bahrain                                      ) -> True) where BHR = Country bahrain
+pattern BGD <- ((== Country bangladesh                                   ) -> True) where BGD = Country bangladesh
+pattern BRB <- ((== Country barbados                                     ) -> True) where BRB = Country barbados
+pattern BLR <- ((== Country belarus                                      ) -> True) where BLR = Country belarus
+pattern BEL <- ((== Country belgium                                      ) -> True) where BEL = Country belgium
+pattern BLZ <- ((== Country belize                                       ) -> True) where BLZ = Country belize
+pattern BEN <- ((== Country benin                                        ) -> True) where BEN = Country benin
+pattern BMU <- ((== Country bermuda                                      ) -> True) where BMU = Country bermuda
+pattern BTN <- ((== Country bhutan                                       ) -> True) where BTN = Country bhutan
+pattern BOL <- ((== Country boliviaPlurinationalStateOf                  ) -> True) where BOL = Country boliviaPlurinationalStateOf
+pattern BES <- ((== Country bonaireSintEustatiusAndSaba                  ) -> True) where BES = Country bonaireSintEustatiusAndSaba
+pattern BIH <- ((== Country bosniaAndHerzegovina                         ) -> True) where BIH = Country bosniaAndHerzegovina
+pattern BWA <- ((== Country botswana                                     ) -> True) where BWA = Country botswana
+pattern BVT <- ((== Country bouvetIsland                                 ) -> True) where BVT = Country bouvetIsland
+pattern BRA <- ((== Country brazil                                       ) -> True) where BRA = Country brazil
+pattern IOT <- ((== Country britishIndianOceanTerritory                  ) -> True) where IOT = Country britishIndianOceanTerritory
+pattern BRN <- ((== Country bruneiDarussalam                             ) -> True) where BRN = Country bruneiDarussalam
+pattern BGR <- ((== Country bulgaria                                     ) -> True) where BGR = Country bulgaria
+pattern BFA <- ((== Country burkinaFaso                                  ) -> True) where BFA = Country burkinaFaso
+pattern BDI <- ((== Country burundi                                      ) -> True) where BDI = Country burundi
+pattern KHM <- ((== Country cambodia                                     ) -> True) where KHM = Country cambodia
+pattern CMR <- ((== Country cameroon                                     ) -> True) where CMR = Country cameroon
+pattern CAN <- ((== Country canada                                       ) -> True) where CAN = Country canada
+pattern CPV <- ((== Country caboVerde                                    ) -> True) where CPV = Country caboVerde
+pattern CYM <- ((== Country caymanIslands                                ) -> True) where CYM = Country caymanIslands
+pattern CAF <- ((== Country centralAfricanRepublic                       ) -> True) where CAF = Country centralAfricanRepublic
+pattern TCD <- ((== Country chad                                         ) -> True) where TCD = Country chad
+pattern CHL <- ((== Country chile                                        ) -> True) where CHL = Country chile
+pattern CHN <- ((== Country china                                        ) -> True) where CHN = Country china
+pattern CXR <- ((== Country christmasIsland                              ) -> True) where CXR = Country christmasIsland
+pattern CCK <- ((== Country cocosKeelingIslands                          ) -> True) where CCK = Country cocosKeelingIslands
+pattern COL <- ((== Country colombia                                     ) -> True) where COL = Country colombia
+pattern COM <- ((== Country comoros                                      ) -> True) where COM = Country comoros
+pattern COG <- ((== Country congo                                        ) -> True) where COG = Country congo
+pattern COD <- ((== Country congoDemocraticRepublicOfThe                 ) -> True) where COD = Country congoDemocraticRepublicOfThe
+pattern COK <- ((== Country cookIslands                                  ) -> True) where COK = Country cookIslands
+pattern CRI <- ((== Country costaRica                                    ) -> True) where CRI = Country costaRica
+pattern CIV <- ((== Country côteDivoire                                  ) -> True) where CIV = Country côteDivoire
+pattern HRV <- ((== Country croatia                                      ) -> True) where HRV = Country croatia
+pattern CUB <- ((== Country cuba                                         ) -> True) where CUB = Country cuba
+pattern CUW <- ((== Country curaçao                                      ) -> True) where CUW = Country curaçao
+pattern CYP <- ((== Country cyprus                                       ) -> True) where CYP = Country cyprus
+pattern CZE <- ((== Country czechRepublic                                ) -> True) where CZE = Country czechRepublic
+pattern DNK <- ((== Country denmark                                      ) -> True) where DNK = Country denmark
+pattern DJI <- ((== Country djibouti                                     ) -> True) where DJI = Country djibouti
+pattern DMA <- ((== Country dominica                                     ) -> True) where DMA = Country dominica
+pattern DOM <- ((== Country dominicanRepublic                            ) -> True) where DOM = Country dominicanRepublic
+pattern ECU <- ((== Country ecuador                                      ) -> True) where ECU = Country ecuador
+pattern EGY <- ((== Country egypt                                        ) -> True) where EGY = Country egypt
+pattern SLV <- ((== Country elSalvador                                   ) -> True) where SLV = Country elSalvador
+pattern GNQ <- ((== Country equatorialGuinea                             ) -> True) where GNQ = Country equatorialGuinea
+pattern ERI <- ((== Country eritrea                                      ) -> True) where ERI = Country eritrea
+pattern EST <- ((== Country estonia                                      ) -> True) where EST = Country estonia
+pattern ETH <- ((== Country ethiopia                                     ) -> True) where ETH = Country ethiopia
+pattern FLK <- ((== Country falklandIslandsMalvinas                      ) -> True) where FLK = Country falklandIslandsMalvinas
+pattern FRO <- ((== Country faroeIslands                                 ) -> True) where FRO = Country faroeIslands
+pattern FJI <- ((== Country fiji                                         ) -> True) where FJI = Country fiji
+pattern FIN <- ((== Country finland                                      ) -> True) where FIN = Country finland
+pattern FRA <- ((== Country france                                       ) -> True) where FRA = Country france
+pattern GUF <- ((== Country frenchGuiana                                 ) -> True) where GUF = Country frenchGuiana
+pattern PYF <- ((== Country frenchPolynesia                              ) -> True) where PYF = Country frenchPolynesia
+pattern ATF <- ((== Country frenchSouthernTerritories                    ) -> True) where ATF = Country frenchSouthernTerritories
+pattern GAB <- ((== Country gabon                                        ) -> True) where GAB = Country gabon
+pattern GMB <- ((== Country gambia                                       ) -> True) where GMB = Country gambia
+pattern GEO <- ((== Country georgia                                      ) -> True) where GEO = Country georgia
+pattern DEU <- ((== Country germany                                      ) -> True) where DEU = Country germany
+pattern GHA <- ((== Country ghana                                        ) -> True) where GHA = Country ghana
+pattern GIB <- ((== Country gibraltar                                    ) -> True) where GIB = Country gibraltar
+pattern GRC <- ((== Country greece                                       ) -> True) where GRC = Country greece
+pattern GRL <- ((== Country greenland                                    ) -> True) where GRL = Country greenland
+pattern GRD <- ((== Country grenada                                      ) -> True) where GRD = Country grenada
+pattern GLP <- ((== Country guadeloupe                                   ) -> True) where GLP = Country guadeloupe
+pattern GUM <- ((== Country guam                                         ) -> True) where GUM = Country guam
+pattern GTM <- ((== Country guatemala                                    ) -> True) where GTM = Country guatemala
+pattern GGY <- ((== Country guernsey                                     ) -> True) where GGY = Country guernsey
+pattern GIN <- ((== Country guinea                                       ) -> True) where GIN = Country guinea
+pattern GNB <- ((== Country guineabissau                                 ) -> True) where GNB = Country guineabissau
+pattern GUY <- ((== Country guyana                                       ) -> True) where GUY = Country guyana
+pattern HTI <- ((== Country haiti                                        ) -> True) where HTI = Country haiti
+pattern HMD <- ((== Country heardIslandAndMcdonaldIslands                ) -> True) where HMD = Country heardIslandAndMcdonaldIslands
+pattern VAT <- ((== Country holySee                                      ) -> True) where VAT = Country holySee
+pattern HND <- ((== Country honduras                                     ) -> True) where HND = Country honduras
+pattern HKG <- ((== Country hongKong                                     ) -> True) where HKG = Country hongKong
+pattern HUN <- ((== Country hungary                                      ) -> True) where HUN = Country hungary
+pattern ISL <- ((== Country iceland                                      ) -> True) where ISL = Country iceland
+pattern IND <- ((== Country india                                        ) -> True) where IND = Country india
+pattern IDN <- ((== Country indonesia                                    ) -> True) where IDN = Country indonesia
+pattern IRN <- ((== Country iranIslamicRepublicOf                        ) -> True) where IRN = Country iranIslamicRepublicOf
+pattern IRQ <- ((== Country iraq                                         ) -> True) where IRQ = Country iraq
+pattern IRL <- ((== Country ireland                                      ) -> True) where IRL = Country ireland
+pattern IMN <- ((== Country isleOfMan                                    ) -> True) where IMN = Country isleOfMan
+pattern ISR <- ((== Country israel                                       ) -> True) where ISR = Country israel
+pattern ITA <- ((== Country italy                                        ) -> True) where ITA = Country italy
+pattern JAM <- ((== Country jamaica                                      ) -> True) where JAM = Country jamaica
+pattern JPN <- ((== Country japan                                        ) -> True) where JPN = Country japan
+pattern JEY <- ((== Country jersey                                       ) -> True) where JEY = Country jersey
+pattern JOR <- ((== Country jordan                                       ) -> True) where JOR = Country jordan
+pattern KAZ <- ((== Country kazakhstan                                   ) -> True) where KAZ = Country kazakhstan
+pattern KEN <- ((== Country kenya                                        ) -> True) where KEN = Country kenya
+pattern KIR <- ((== Country kiribati                                     ) -> True) where KIR = Country kiribati
+pattern PRK <- ((== Country koreaDemocraticPeoplesRepublicOf             ) -> True) where PRK = Country koreaDemocraticPeoplesRepublicOf
+pattern KOR <- ((== Country koreaRepublicOf                              ) -> True) where KOR = Country koreaRepublicOf
+pattern KWT <- ((== Country kuwait                                       ) -> True) where KWT = Country kuwait
+pattern KGZ <- ((== Country kyrgyzstan                                   ) -> True) where KGZ = Country kyrgyzstan
+pattern LAO <- ((== Country laoPeoplesDemocraticRepublic                 ) -> True) where LAO = Country laoPeoplesDemocraticRepublic
+pattern LVA <- ((== Country latvia                                       ) -> True) where LVA = Country latvia
+pattern LBN <- ((== Country lebanon                                      ) -> True) where LBN = Country lebanon
+pattern LSO <- ((== Country lesotho                                      ) -> True) where LSO = Country lesotho
+pattern LBR <- ((== Country liberia                                      ) -> True) where LBR = Country liberia
+pattern LBY <- ((== Country libya                                        ) -> True) where LBY = Country libya
+pattern LIE <- ((== Country liechtenstein                                ) -> True) where LIE = Country liechtenstein
+pattern LTU <- ((== Country lithuania                                    ) -> True) where LTU = Country lithuania
+pattern LUX <- ((== Country luxembourg                                   ) -> True) where LUX = Country luxembourg
+pattern MAC <- ((== Country macao                                        ) -> True) where MAC = Country macao
+pattern MKD <- ((== Country macedoniaTheFormerYugoslavRepublicOf         ) -> True) where MKD = Country macedoniaTheFormerYugoslavRepublicOf
+pattern MDG <- ((== Country madagascar                                   ) -> True) where MDG = Country madagascar
+pattern MWI <- ((== Country malawi                                       ) -> True) where MWI = Country malawi
+pattern MYS <- ((== Country malaysia                                     ) -> True) where MYS = Country malaysia
+pattern MDV <- ((== Country maldives                                     ) -> True) where MDV = Country maldives
+pattern MLI <- ((== Country mali                                         ) -> True) where MLI = Country mali
+pattern MLT <- ((== Country malta                                        ) -> True) where MLT = Country malta
+pattern MHL <- ((== Country marshallIslands                              ) -> True) where MHL = Country marshallIslands
+pattern MTQ <- ((== Country martinique                                   ) -> True) where MTQ = Country martinique
+pattern MRT <- ((== Country mauritania                                   ) -> True) where MRT = Country mauritania
+pattern MUS <- ((== Country mauritius                                    ) -> True) where MUS = Country mauritius
+pattern MYT <- ((== Country mayotte                                      ) -> True) where MYT = Country mayotte
+pattern MEX <- ((== Country mexico                                       ) -> True) where MEX = Country mexico
+pattern FSM <- ((== Country micronesiaFederatedStatesOf                  ) -> True) where FSM = Country micronesiaFederatedStatesOf
+pattern MDA <- ((== Country moldovaRepublicOf                            ) -> True) where MDA = Country moldovaRepublicOf
+pattern MCO <- ((== Country monaco                                       ) -> True) where MCO = Country monaco
+pattern MNG <- ((== Country mongolia                                     ) -> True) where MNG = Country mongolia
+pattern MNE <- ((== Country montenegro                                   ) -> True) where MNE = Country montenegro
+pattern MSR <- ((== Country montserrat                                   ) -> True) where MSR = Country montserrat
+pattern MAR <- ((== Country morocco                                      ) -> True) where MAR = Country morocco
+pattern MOZ <- ((== Country mozambique                                   ) -> True) where MOZ = Country mozambique
+pattern MMR <- ((== Country myanmar                                      ) -> True) where MMR = Country myanmar
+pattern NAM <- ((== Country namibia                                      ) -> True) where NAM = Country namibia
+pattern NRU <- ((== Country nauru                                        ) -> True) where NRU = Country nauru
+pattern NPL <- ((== Country nepal                                        ) -> True) where NPL = Country nepal
+pattern NLD <- ((== Country netherlands                                  ) -> True) where NLD = Country netherlands
+pattern NCL <- ((== Country newCaledonia                                 ) -> True) where NCL = Country newCaledonia
+pattern NZL <- ((== Country newZealand                                   ) -> True) where NZL = Country newZealand
+pattern NIC <- ((== Country nicaragua                                    ) -> True) where NIC = Country nicaragua
+pattern NER <- ((== Country niger                                        ) -> True) where NER = Country niger
+pattern NGA <- ((== Country nigeria                                      ) -> True) where NGA = Country nigeria
+pattern NIU <- ((== Country niue                                         ) -> True) where NIU = Country niue
+pattern NFK <- ((== Country norfolkIsland                                ) -> True) where NFK = Country norfolkIsland
+pattern MNP <- ((== Country northernMarianaIslands                       ) -> True) where MNP = Country northernMarianaIslands
+pattern NOR <- ((== Country norway                                       ) -> True) where NOR = Country norway
+pattern OMN <- ((== Country oman                                         ) -> True) where OMN = Country oman
+pattern PAK <- ((== Country pakistan                                     ) -> True) where PAK = Country pakistan
+pattern PLW <- ((== Country palau                                        ) -> True) where PLW = Country palau
+pattern PSE <- ((== Country palestineStateOf                             ) -> True) where PSE = Country palestineStateOf
+pattern PAN <- ((== Country panama                                       ) -> True) where PAN = Country panama
+pattern PNG <- ((== Country papuaNewGuinea                               ) -> True) where PNG = Country papuaNewGuinea
+pattern PRY <- ((== Country paraguay                                     ) -> True) where PRY = Country paraguay
+pattern PER <- ((== Country peru                                         ) -> True) where PER = Country peru
+pattern PHL <- ((== Country philippines                                  ) -> True) where PHL = Country philippines
+pattern PCN <- ((== Country pitcairn                                     ) -> True) where PCN = Country pitcairn
+pattern POL <- ((== Country poland                                       ) -> True) where POL = Country poland
+pattern PRT <- ((== Country portugal                                     ) -> True) where PRT = Country portugal
+pattern PRI <- ((== Country puertoRico                                   ) -> True) where PRI = Country puertoRico
+pattern QAT <- ((== Country qatar                                        ) -> True) where QAT = Country qatar
+pattern REU <- ((== Country réunion                                      ) -> True) where REU = Country réunion
+pattern ROU <- ((== Country romania                                      ) -> True) where ROU = Country romania
+pattern RUS <- ((== Country russianFederation                            ) -> True) where RUS = Country russianFederation
+pattern RWA <- ((== Country rwanda                                       ) -> True) where RWA = Country rwanda
+pattern BLM <- ((== Country saintBarthélemy                              ) -> True) where BLM = Country saintBarthélemy
+pattern SHN <- ((== Country saintHelenaAscensionAndTristanDaCunha        ) -> True) where SHN = Country saintHelenaAscensionAndTristanDaCunha
+pattern KNA <- ((== Country saintKittsAndNevis                           ) -> True) where KNA = Country saintKittsAndNevis
+pattern LCA <- ((== Country saintLucia                                   ) -> True) where LCA = Country saintLucia
+pattern MAF <- ((== Country saintMartinFrenchPart                        ) -> True) where MAF = Country saintMartinFrenchPart
+pattern SPM <- ((== Country saintPierreAndMiquelon                       ) -> True) where SPM = Country saintPierreAndMiquelon
+pattern VCT <- ((== Country saintVincentAndTheGrenadines                 ) -> True) where VCT = Country saintVincentAndTheGrenadines
+pattern WSM <- ((== Country samoa                                        ) -> True) where WSM = Country samoa
+pattern SMR <- ((== Country sanMarino                                    ) -> True) where SMR = Country sanMarino
+pattern STP <- ((== Country saoTomeAndPrincipe                           ) -> True) where STP = Country saoTomeAndPrincipe
+pattern SAU <- ((== Country saudiArabia                                  ) -> True) where SAU = Country saudiArabia
+pattern SEN <- ((== Country senegal                                      ) -> True) where SEN = Country senegal
+pattern SRB <- ((== Country serbia                                       ) -> True) where SRB = Country serbia
+pattern SYC <- ((== Country seychelles                                   ) -> True) where SYC = Country seychelles
+pattern SLE <- ((== Country sierraLeone                                  ) -> True) where SLE = Country sierraLeone
+pattern SGP <- ((== Country singapore                                    ) -> True) where SGP = Country singapore
+pattern SXM <- ((== Country sintMaartenDutchPart                         ) -> True) where SXM = Country sintMaartenDutchPart
+pattern SVK <- ((== Country slovakia                                     ) -> True) where SVK = Country slovakia
+pattern SVN <- ((== Country slovenia                                     ) -> True) where SVN = Country slovenia
+pattern SLB <- ((== Country solomonIslands                               ) -> True) where SLB = Country solomonIslands
+pattern SOM <- ((== Country somalia                                      ) -> True) where SOM = Country somalia
+pattern ZAF <- ((== Country southAfrica                                  ) -> True) where ZAF = Country southAfrica
+pattern SGS <- ((== Country southGeorgiaAndTheSouthSandwichIslands       ) -> True) where SGS = Country southGeorgiaAndTheSouthSandwichIslands
+pattern SSD <- ((== Country southSudan                                   ) -> True) where SSD = Country southSudan
+pattern ESP <- ((== Country spain                                        ) -> True) where ESP = Country spain
+pattern LKA <- ((== Country sriLanka                                     ) -> True) where LKA = Country sriLanka
+pattern SDN <- ((== Country sudan                                        ) -> True) where SDN = Country sudan
+pattern SUR <- ((== Country suriname                                     ) -> True) where SUR = Country suriname
+pattern SJM <- ((== Country svalbardAndJanMayen                          ) -> True) where SJM = Country svalbardAndJanMayen
+pattern SWZ <- ((== Country swaziland                                    ) -> True) where SWZ = Country swaziland
+pattern SWE <- ((== Country sweden                                       ) -> True) where SWE = Country sweden
+pattern CHE <- ((== Country switzerland                                  ) -> True) where CHE = Country switzerland
+pattern SYR <- ((== Country syrianArabRepublic                           ) -> True) where SYR = Country syrianArabRepublic
+pattern TWN <- ((== Country taiwanProvinceOfChina                        ) -> True) where TWN = Country taiwanProvinceOfChina
+pattern TJK <- ((== Country tajikistan                                   ) -> True) where TJK = Country tajikistan
+pattern TZA <- ((== Country tanzaniaUnitedRepublicOf                     ) -> True) where TZA = Country tanzaniaUnitedRepublicOf
+pattern THA <- ((== Country thailand                                     ) -> True) where THA = Country thailand
+pattern TLS <- ((== Country timorleste                                   ) -> True) where TLS = Country timorleste
+pattern TGO <- ((== Country togo                                         ) -> True) where TGO = Country togo
+pattern TKL <- ((== Country tokelau                                      ) -> True) where TKL = Country tokelau
+pattern TON <- ((== Country tonga                                        ) -> True) where TON = Country tonga
+pattern TTO <- ((== Country trinidadAndTobago                            ) -> True) where TTO = Country trinidadAndTobago
+pattern TUN <- ((== Country tunisia                                      ) -> True) where TUN = Country tunisia
+pattern TUR <- ((== Country turkey                                       ) -> True) where TUR = Country turkey
+pattern TKM <- ((== Country turkmenistan                                 ) -> True) where TKM = Country turkmenistan
+pattern TCA <- ((== Country turksAndCaicosIslands                        ) -> True) where TCA = Country turksAndCaicosIslands
+pattern TUV <- ((== Country tuvalu                                       ) -> True) where TUV = Country tuvalu
+pattern UGA <- ((== Country uganda                                       ) -> True) where UGA = Country uganda
+pattern UKR <- ((== Country ukraine                                      ) -> True) where UKR = Country ukraine
+pattern ARE <- ((== Country unitedArabEmirates                           ) -> True) where ARE = Country unitedArabEmirates
+pattern GBR <- ((== Country unitedKingdomOfGreatBritainAndNorthernIreland) -> True) where GBR = Country unitedKingdomOfGreatBritainAndNorthernIreland
+pattern USA <- ((== Country unitedStatesOfAmerica                        ) -> True) where USA = Country unitedStatesOfAmerica
+pattern UMI <- ((== Country unitedStatesMinorOutlyingIslands             ) -> True) where UMI = Country unitedStatesMinorOutlyingIslands
+pattern URY <- ((== Country uruguay                                      ) -> True) where URY = Country uruguay
+pattern UZB <- ((== Country uzbekistan                                   ) -> True) where UZB = Country uzbekistan
+pattern VUT <- ((== Country vanuatu                                      ) -> True) where VUT = Country vanuatu
+pattern VEN <- ((== Country venezuelaBolivarianRepublicOf                ) -> True) where VEN = Country venezuelaBolivarianRepublicOf
+pattern VNM <- ((== Country vietNam                                      ) -> True) where VNM = Country vietNam
+pattern VGB <- ((== Country virginIslandsBritish                         ) -> True) where VGB = Country virginIslandsBritish
+pattern VIR <- ((== Country virginIslandsUs                              ) -> True) where VIR = Country virginIslandsUs
+pattern WLF <- ((== Country wallisAndFutuna                              ) -> True) where WLF = Country wallisAndFutuna
+pattern ESH <- ((== Country westernSahara                                ) -> True) where ESH = Country westernSahara
+pattern YEM <- ((== Country yemen                                        ) -> True) where YEM = Country yemen
+pattern ZMB <- ((== Country zambia                                       ) -> True) where ZMB = Country zambia
+pattern ZWE <- ((== Country zimbabwe                                     ) -> True) where ZWE = Country zimbabwe
+pattern XKX <- ((== Country kosovo                                       ) -> True) where XKX = Country kosovo
