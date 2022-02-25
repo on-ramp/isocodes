@@ -35,7 +35,7 @@ data Currency (format :: k) = Currency { unCurrency :: Currency.Currency }
                               deriving (Data, Eq, Generic)
 
 instance Ord (Currency format) where
-  compare = compare `on` Currency.minor . unCurrency
+  compare = compare `on` Currency.alpha . unCurrency
 
 
 instance ToJSON (Currency format) => ToJSONKey (Currency format)
