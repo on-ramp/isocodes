@@ -27,8 +27,8 @@ import           Web.HttpApiData
 
 
 
-data Country (format :: k) = Country { unCountry :: Country.Country }
-                             deriving (Data, Eq, Generic, Ord)
+newtype Country (format :: k) = Country { unCountry :: Country.Country }
+                                deriving (Data, Eq, Generic, Ord)
 
 
 

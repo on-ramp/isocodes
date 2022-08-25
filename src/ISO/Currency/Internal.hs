@@ -31,8 +31,8 @@ import           Web.HttpApiData
 
 
 
-data Currency (format :: k) = Currency { unCurrency :: Currency.Currency }
-                              deriving (Data, Eq, Generic)
+newtype Currency (format :: k) = Currency { unCurrency :: Currency.Currency }
+                                 deriving (Data, Eq, Generic)
 
 instance Ord (Currency format) where
   compare = compare `on` Currency.alpha . unCurrency

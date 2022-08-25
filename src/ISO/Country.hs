@@ -10,7 +10,6 @@ module ISO.Country
   , countries
   ) where
 
-import           ISO.Convert
 import           ISO.Country.Internal
 import           ISO.Format
 
