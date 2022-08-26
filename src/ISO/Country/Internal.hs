@@ -16,12 +16,18 @@ import           ISO.Format
 
 import qualified Country
 import           Data.Aeson
+import qualified Data.Attoparsec.ByteString.Char8 as ABSC
 import qualified Data.Attoparsec.Text as AT
+import           Data.ByteString.Builder
+import qualified Data.ByteString.Char8 as BSC
 import           Data.Data (Data)
 import           Data.Scientific
 import           Data.Text (Text)
 import qualified Data.Text as T
+import           Data.Text.Encoding
 import           Data.Word
+import           Database.PostgreSQL.Simple.FromField
+import           Database.PostgreSQL.Simple.ToField
 import           GHC.Generics (Generic)
 import           Web.HttpApiData
 
@@ -92,6 +98,19 @@ instance FromHttpApiData (Country Name) where
       Nothing      -> Left $ "Not a valid Country Name: " <> val
       Just country -> Right country
 
+-- | Treated as text.
+instance ToField (Country Name) where
+  toField = Escape . encodeUtf8 . to
+
+-- | Treated as text.
+instance FromField (Country Name) where
+  fromField field Nothing   = returnError UnexpectedNull field ""
+  fromField field (Just bs) =
+    case from $ decodeUtf8 bs of
+      Just alpha -> return alpha
+      Nothing    -> returnError ConversionFailed field $
+                      "Not a valid Country Name: " <> BSC.unpack bs
+
 
 
 instance ToJSON (Country Code) where
@@ -121,6 +140,27 @@ instance FromHttpApiData (Country Code) where
               Nothing      -> Left $ "Not a valid Country Code: " <> T.pack (show bounded)
               Just country -> Right country
 
+-- | Treated as number.
+instance ToField (Country Code) where
+  toField = Plain . word16Dec . to
+
+-- | Treated as number.
+instance FromField (Country Code) where
+  fromField field Nothing   = returnError UnexpectedNull field ""
+  fromField field (Just bs) =
+    case ABSC.parseOnly (ABSC.scientific <* ABSC.endOfInput) bs of
+      Left _    -> returnError ConversionFailed field $
+                     "Country Code is not a number: " <> BSC.unpack bs
+      Right sci ->
+        case toBoundedInteger sci of
+          Nothing      -> returnError ConversionFailed field $
+                            "Country Code is not an integer value: " <> BSC.unpack bs
+          Just bounded ->
+            case from bounded of
+              Nothing   -> returnError ConversionFailed field $
+                             "Not a valid Country Code: " <> BSC.unpack bs
+              Just code -> return code
+
 
 
 instance ToJSON (Country Alpha2) where
@@ -141,6 +181,19 @@ instance FromHttpApiData (Country Alpha2) where
       Nothing      -> Left $ "Not a valid Country Alpha2: " <> val
       Just country -> Right country
 
+-- | Treated as text.
+instance ToField (Country Alpha2) where
+  toField = Escape . encodeUtf8 . to
+
+-- | Treated as text.
+instance FromField (Country Alpha2) where
+  fromField field Nothing   = returnError UnexpectedNull field ""
+  fromField field (Just bs) =
+    case from $ decodeUtf8 bs of
+      Just alpha -> return alpha
+      Nothing    -> returnError ConversionFailed field $
+                      "Not a valid Country Alpha2: " <> BSC.unpack bs
+
 
 
 instance ToJSON (Country Alpha3) where
@@ -160,3 +213,16 @@ instance FromHttpApiData (Country Alpha3) where
     case from val of
       Nothing      -> Left $ "Not a valid Country Alpha3: " <> val
       Just country -> Right country
+
+-- | Treated as text.
+instance ToField (Country Alpha3) where
+  toField = Escape . encodeUtf8 . to
+
+-- | Treated as text.
+instance FromField (Country Alpha3) where
+  fromField field Nothing   = returnError UnexpectedNull field ""
+  fromField field (Just bs) =
+    case from $ decodeUtf8 bs of
+      Just alpha -> return alpha
+      Nothing    -> returnError ConversionFailed field $
+                      "Not a valid Country Alpha3: " <> BSC.unpack bs

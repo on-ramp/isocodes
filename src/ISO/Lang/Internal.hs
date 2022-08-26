@@ -16,9 +16,12 @@ import           ISO.Convert
 import           ISO.Format
 
 import           Data.Aeson
+import qualified Data.ByteString.Char8 as BSC
 import           Data.Data
 import           Data.LanguageCodes
 import qualified Data.Text as T
+import           Database.PostgreSQL.Simple.FromField
+import           Database.PostgreSQL.Simple.ToField
 import           GHC.Generics (Generic)
 import           Web.HttpApiData
 
@@ -69,3 +72,23 @@ instance FromHttpApiData (Lang Alpha2) where
                   Nothing   -> Left $ "Not a valid Lang Alpha2: " <> val
 
       _      -> Left $ "Lang Alpha2 is not two characters long: " <> val
+
+
+
+-- | Treated as text.
+instance ToField (Lang Alpha2) where
+  toField lang = let (a, b) = to lang
+                 in Escape $ BSC.pack [a, b]
+
+-- | Treated as text.
+instance FromField (Lang Alpha2) where
+  fromField field Nothing   = returnError UnexpectedNull field ""
+  fromField field (Just bs) =
+    case BSC.unpack bs of
+      [a, b] -> case from (a, b) of
+                  Just lang -> return lang
+                  Nothing   -> returnError ConversionFailed field $
+                                 "Not a valid Lang Alpha2: " <> [a, b]
+
+      raw    -> returnError ConversionFailed field $
+                  "Lang Alpha2 is not two characters long: " <> raw
