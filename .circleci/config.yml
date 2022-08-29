@@ -1,30 +1,36 @@
 version: 2.1
+
 jobs:
   build:
     docker:
-      - image: fpco/stack-build:lts
-
-    resource_class: medium
-
+      - image: haskell:8.10.7-slim
     steps:
+      - run:
+          name: Update
+          command: apt-get update && apt-get install -y openssh-client git libpq-dev
+
       - checkout
 
       - restore_cache:
-          name: Restore cached dependencies
+          name: Restore dependencies
           keys:
-            - cache-{{ checksum "stack.yaml" }}-{{ checksum "package.yaml" }}
-            - cache-{{ checksum "stack.yaml" }}
-      - run:
-          name: Resolve/update dependencies
-          command: stack --no-terminal -j2 setup
+            - cache-8.10.7-{{ checksum "isocodes.cabal" }}
 
       - run:
-          name: Run tests
-          command: stack --no-terminal -j2 test
+          name: Update dependencies
+          command: cabal new-update && cabal new-install --lib
+
+      - run:
+          name: Build
+          command: cabal new-build --enable-tests
 
       - save_cache:
           name: Cache dependencies
-          key: cache-{{ checksum "stack.yaml" }}-{{ checksum "package.yaml" }}
+          key: cache-8.10.7-{{ checksum "isocodes.cabal" }}
           paths:
-            - "/root/.stack"
-            - ".stack-work"
+            - "/root/.cabal"
+            - "dist-newstyle"
+
+      - run:
+          name: Run tests
+          command: cabal new-test

@@ -15,7 +15,10 @@ import           ISO.Convert
 import           ISO.Format
 
 import           Data.Aeson
+import qualified Data.Attoparsec.ByteString.Char8 as ABSC
 import qualified Data.Attoparsec.Text as AT
+import           Data.ByteString.Builder
+import qualified Data.ByteString.Char8 as BSC
 import qualified Data.Currency as Currency
 import           Data.Data (Data)
 import           Data.Function (on)
@@ -26,13 +29,16 @@ import qualified Data.IntMap.Lazy as IntMap
 import           Data.Scientific
 import           Data.Text (Text)
 import qualified Data.Text as T
+import           Data.Text.Encoding
+import           Database.PostgreSQL.Simple.FromField
+import           Database.PostgreSQL.Simple.ToField
 import           GHC.Generics (Generic)
 import           Web.HttpApiData
 
 
 
-data Currency (format :: k) = Currency { unCurrency :: Currency.Currency }
-                              deriving (Data, Eq, Generic)
+newtype Currency (format :: k) = Currency { unCurrency :: Currency.Currency }
+                                 deriving (Data, Eq, Generic)
 
 instance Ord (Currency format) where
   compare = compare `on` Currency.alpha . unCurrency
@@ -74,6 +80,19 @@ instance FromHttpApiData (Currency Alpha) where
     case from val of
       Nothing    -> Left $ "Not a valid Currency Alpha: " <> val
       Just alpha -> Right alpha
+
+-- | Treated as text.
+instance ToField (Currency Alpha) where
+  toField = Escape . encodeUtf8 . to
+
+-- | Treated as text.
+instance FromField (Currency Alpha) where
+  fromField field Nothing   = returnError UnexpectedNull field ""
+  fromField field (Just bs) =
+    case from $ decodeUtf8 bs of
+      Just alpha -> return alpha
+      Nothing    -> returnError ConversionFailed field $
+                      "Not a valid Currency Alpha: " <> BSC.unpack bs
 
 
 
@@ -118,3 +137,24 @@ instance FromHttpApiData (Currency Code) where
             case from bounded of
               Nothing   -> Left $ "Not a valid Currency Code: " <> T.pack (show bounded)
               Just code -> Right code
+
+-- | Treated as number.
+instance ToField (Currency Code) where
+  toField = Plain . intDec . to
+
+-- | Treated as number.
+instance FromField (Currency Code) where
+  fromField field Nothing   = returnError UnexpectedNull field ""
+  fromField field (Just bs) =
+    case ABSC.parseOnly (ABSC.scientific <* ABSC.endOfInput) bs of
+      Left _    -> returnError ConversionFailed field $
+                     "Currency Code is not a number: " <> BSC.unpack bs
+      Right sci ->
+        case toBoundedInteger sci of
+          Nothing      -> returnError ConversionFailed field $
+                            "Currency Code is not an integer value: " <> BSC.unpack bs
+          Just bounded ->
+            case from bounded of
+              Nothing   -> returnError ConversionFailed field $
+                             "Not a valid Currency Code: " <> BSC.unpack bs
+              Just code -> return code

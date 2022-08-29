@@ -7,121 +7,121 @@
 
 module Main where
 
+import           ISO.Convert
 import           ISO.Country
-import           ISO.Country.Internal
 import           ISO.Currency
-import           ISO.Currency.Internal
+import           ISO.Lang
 
-import qualified Country
 import           Data.Aeson
 import           Data.ByteString.Builder
 import           Data.ByteString.Lazy.Char8 (ByteString)
-import qualified Data.ByteString.Lazy.Char8 as BSLC
-import qualified Data.Currency as Currency
 import           Data.Text (Text)
 import qualified Data.Text as T
 import           Data.Text.Encoding
-import           Data.Word (Word16)
 import           Test.Hspec
 import           Test.QuickCheck
 import           Web.HttpApiData
 
 
 
-instance Arbitrary (Country format) where
-  arbitrary = elements countries
-
-unAlpha2 :: Country Alpha2 -> Text
-unAlpha2 = Country.alphaTwoUpper . unCountry
-
-unAlpha3 :: Country Alpha3 -> Text
-unAlpha3 = Country.alphaThreeUpper . unCountry
-
-unCode :: Country Code -> Word16
-unCode = Country.encodeNumeric . unCountry
-
-unName :: Country Name -> Text
-unName = Country.encodeEnglish . unCountry
-
 toLazyBS :: Text -> ByteString
 toLazyBS = toLazyByteString . encodeUtf8Builder
+
+
+
+instance Arbitrary (Country format) where
+  arbitrary = elements countries
 
 
 instance Arbitrary (Currency format) where
   arbitrary = elements currencies
 
-unAlpha :: Currency Alpha -> [Char]
-unAlpha = show . Currency.alpha . unCurrency
 
-unCode' :: Currency Code -> Int
-unCode' = Currency.numeric . unCurrency
+instance Arbitrary (Lang format) where
+  arbitrary = elements languages
+
 
 
 main :: IO ()
 main =
   hspec $ do
     describe "Countries" $ do
-      describe "Encode properly" $ do
+      describe "Encode" $ do
         it "Alpha2" $
-          property $ \country@(unAlpha2 -> ref) -> do
+          property $ \country@(to @Country @Alpha2 -> ref) -> do
             toJSON country `shouldBe` String ref
             toQueryParam country `shouldBe` ref
 
         it "Alpha3" $
-          property $ \country@(unAlpha3 -> ref) -> do
+          property $ \country@(to @Country @Alpha3 -> ref) -> do
             toJSON country `shouldBe` String ref
             toQueryParam country `shouldBe` ref
 
         it "Code" $
-          property $ \country@(unCode -> ref) -> do
+          property $ \country@(to @Country @Code -> ref) -> do
             toJSON country `shouldBe` Number (fromIntegral ref)
             toQueryParam country `shouldBe` T.pack (show ref)
 
         it "Name" $
-          property $ \country@(unName -> ref) -> do
+          property $ \country@(to @Country @Name -> ref) -> do
             toJSON country `shouldBe` String ref
             toQueryParam country `shouldBe` ref
 
-      describe "Decode properly" $ do
+      describe "Decode" $ do
         it "Alpha2" $
-          property $ \country@(unAlpha2 -> ref) -> do
+          property $ \country@(to @Country @Alpha2 -> ref) -> do
             eitherDecode ("\"" <> toLazyBS ref <> "\"") `shouldBe` Right country
             parseQueryParam ref `shouldBe` Right country
 
         it "Alpha3" $
-          property $ \country@(unAlpha3 -> ref) -> do
+          property $ \country@(to @Country @Alpha3 -> ref) -> do
             eitherDecode ("\"" <> toLazyBS ref <> "\"") `shouldBe` Right country
             parseQueryParam ref `shouldBe` Right country
 
         it "Code" $
-          property $ \country@(unCode -> ref) -> do
+          property $ \country@(to @Country @Code -> ref) -> do
             eitherDecode (toLazyByteString $ word16Dec ref) `shouldBe` Right country
             parseQueryParam (T.pack $ show ref) `shouldBe` Right country
 
         it "Name" $
-          property $ \country@(unName -> ref) -> do
+          property $ \country@(to @Country @Name -> ref) -> do
             eitherDecode ("\"" <> toLazyBS ref <> "\"") `shouldBe` Right country
             parseQueryParam ref `shouldBe` Right country
 
     describe "Currencies" $ do
-      describe "Encode properly" $ do
+      describe "Encode" $ do
         it "Alpha" $
-          property $ \currency@(unAlpha -> ref) -> do
-            toJSON currency `shouldBe` String (T.pack ref)
-            toQueryParam currency `shouldBe` T.pack ref
+          property $ \currency@(to @Currency @Alpha -> ref) -> do
+            toJSON currency `shouldBe` String ref
+            toQueryParam currency `shouldBe` ref
 
         it "Code" $
-          property $ \currency@(unCode -> ref) -> do
+          property $ \currency@(to @Currency @Code -> ref) -> do
             toJSON currency `shouldBe` Number (fromIntegral ref)
             toQueryParam currency `shouldBe` T.pack (show ref)
 
-      describe "Decode properly" $ do
+      describe "Decode" $ do
         it "Alpha" $
-          property $ \currency@(unAlpha -> ref) -> do
-            eitherDecode ("\"" <> BSLC.pack ref <> "\"") `shouldBe` Right currency
-            parseQueryParam (T.pack ref) `shouldBe` Right currency
+          property $ \currency@(to @Currency @Alpha -> ref) -> do
+            eitherDecode ("\"" <> toLazyBS ref <> "\"") `shouldBe` Right currency
+            parseQueryParam ref `shouldBe` Right currency
 
         it "Code" $
-          property $ \currency@(unCode' -> ref) -> do
+          property $ \currency@(to @Currency @Code -> ref) -> do
             eitherDecode (toLazyByteString $ intDec ref) `shouldBe` Right currency
             parseQueryParam (T.pack $ show ref) `shouldBe` Right currency
+
+    describe "Languages" $ do
+      describe "Encode" $ do
+        it "Alpha" $
+          property $ \lang@(to @Lang @Alpha2 -> (a, b)) -> do
+            let ref = T.pack [a, b]
+            toJSON lang `shouldBe` String ref
+            toQueryParam lang `shouldBe` ref
+
+      describe "Decode" $ do
+        it "Alpha" $
+          property $ \lang@(to @Lang @Alpha2 -> (a, b)) -> do
+            let ref = T.pack [a, b]
+            eitherDecode ("\"" <> toLazyBS ref <> "\"") `shouldBe` Right lang
+            parseQueryParam ref `shouldBe` Right lang
